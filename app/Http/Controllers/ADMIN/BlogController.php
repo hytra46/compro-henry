@@ -57,8 +57,7 @@ class BlogController extends Controller
             $photo = $request->file('photo')->store('blog', 'public');
             $data['photo'] = $photo;
         }
-        Blog::create([
-        ]);
+        Blog::create($data);
         Alert::success('Success', 'Create New Blog Success!');
         return redirect()->to('admin/blog');
     }
@@ -116,6 +115,8 @@ class BlogController extends Controller
         }
 
         $update->update($data);
+
+        alert()->success('Success', 'Updated success!');
         return redirect()->to('admin/blog');
 
     /**
@@ -127,8 +128,14 @@ class BlogController extends Controller
     }
     public function destroy($id)
     {
-        $delete = Blog::find($id)->delete();
-        File::delete(public_path('storage/' . $delete->photo));
+        $post = Blog::find($id);
+
+        if ($post->photo) {
+            File::delete(public_path('storage/' . $post->photo));
+        }
+
+        $post->delete();
+
         alert()->success('Success', 'Delete success!');
         return redirect()->to('admin/blog');
     }
