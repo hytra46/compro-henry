@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 
-Route::get('/', [\App\Http\Controllers\LoginController::class, 'index']);
+Route::get('/', [\App\Http\Controllers\HomeController::class, 'index']);
 Route::get('login', [\App\Http\Controllers\LoginController::class, 'index'])->name('login');
 Route::post('action-login', [\App\Http\Controllers\LoginController::class, 'actionLogin'])->name('action-login');
 Route::get('sign-out', [\App\Http\Controllers\LoginController::class, 'logout'])->name('sign-out');

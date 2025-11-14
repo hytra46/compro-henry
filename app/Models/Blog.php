@@ -14,8 +14,13 @@ class Blog extends Model
         'category_id',
         'title',
         'slug',
-        'content'
+        'content',
+        'photo',
+        'status',
+        'writter'
     ];
+
+
 
     public function category() {
         return $this->belongsTo(Categories::class, 'category_id', 'id');
